@@ -1,6 +1,18 @@
 const express = require("express");
 const router = express.Router();
 
+var body_parser = require('body-parser');
+
+router.use(body_parser.urlencoded({extended:true}));
+
+router.post('/api/usuario/body', (req, response) => {
+    const usuario = req.body
+    response.status(200).json({
+        resp:"Estas dentro de la API post de usuario",
+        usuario
+    })
+});
+
 router.get("/api/usuario", (request, response) => {
     response.status(200).json({
         response:"Se consuito la API GET general de usuario",
