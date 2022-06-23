@@ -1,11 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-var body_parser = require('body-parser');
-
-router.use(body_parser.urlencoded({extended:true}));
-
-router.post('/api/usuario/body', (req, response) => {
+router.post('/body', (req, response) => {
     const usuario = req.body
     response.status(200).json({
         resp:"Estas dentro de la API post de usuario",
@@ -13,14 +9,14 @@ router.post('/api/usuario/body', (req, response) => {
     })
 });
 
-router.get("/api/usuario", (request, response) => {
+router.get("/", (request, response) => {
     response.status(200).json({
         response:"Se consuito la API GET general de usuario",
     })
 });
 
 //API CON PARAMETROS OBLIGATORIOS
-router.get("/api/usuario/:id/:nombre/:edad/:apellido", (request, response) => {
+router.get("/:id/:nombre/:edad/:apellido", (request, response) => {
 
     //DECLARACION INDIVIDUAL 
     /*
@@ -49,7 +45,7 @@ router.get("/api/usuario/:id/:nombre/:edad/:apellido", (request, response) => {
 });
 
 //API CON PARAMETROS OPCIONALES
-router.get("/api/usuarioBusqueda", (req, resp) => {
+router.get("/usuarioBusqueda", (req, resp) => {
 
     const id = req.query.id; //Parametro opcional
     resp.status(200).json({
@@ -60,19 +56,19 @@ router.get("/api/usuarioBusqueda", (req, resp) => {
 
 }); 
 
-router.post("/api/usuario", (request, response) => {
+router.post("/", (request, response) => {
     response.status(200).json({
         response:"Se consuito la API POST de usuario"
     })
 });
 
-router.put("/api/usuario", (request, response) => {
+router.put("/", (request, response) => {
     response.status(200).json({
         response:"Se consuito la API PUT de usuario"
     })
 });
 
-router.delete("/api/usuario", (request, response) => {
+router.delete("/", (request, response) => {
     response.status(200).json({
         response:"Se consuito la API DELETE de usuario"
     })

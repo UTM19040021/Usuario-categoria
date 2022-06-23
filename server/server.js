@@ -1,11 +1,16 @@
 const express = require("express");
+require("colors");
+require("./config/config");
 const app = express();
+const routes = require('./routes/index');
+
 var body_parser = require('body-parser');
 app.use(body_parser.urlencoded({extended:true}));
 
-const usuario = require("./routes/usuario");
-app.use(usuario);
-const categorias = require("./routes/categorias");
-app.use(categorias);
-app.listen(3000, () => {console.log("Se esta escuchando en el puerto 3000")});
+app.use("/api",routes);
+
+app.listen(process.env.PORT, () => {
+    console.log("ONLINE".green  + "Se esta escuchando en el puerto 3000")
+});
+
 
