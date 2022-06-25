@@ -13,7 +13,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || "dev";
 
 if(process.env.NODE_ENV === "dev") {
 
-    process.env.URLOG = "";
+    process.env.URLDB = "mongodb+srv://user5a:GF8TaI1UH6ZsyUWr@cluster0.slgur.mongodb.net/UTM19040021?retryWrites=true&w=majority";
 } else {
-    process.env.URLOG = "";
+    process.env.URLDB = "mongodb+srv://user5a:GF8TaI1UH6ZsyUWr@cluster0.slgur.mongodb.net/UTM19040021?retryWrites=true&w=majority";
 }

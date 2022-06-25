@@ -1,0 +1,36 @@
+const express = require("express");
+const router = express.Router();
+
+router.get("/categoria", (request, response) => {
+
+   
+ response.status(200).json({
+        "message": "Estás dentro de la API GET Usuario"
+    });
+
+});
+
+router.post("/categoria", (request, response) => {
+
+    response.status(200).json({
+        "message": "Estás dentro de la API POST de usuario"
+    });
+
+});
+
+router.put("/categoria", (req, res) => {
+
+    res.status(200).json({
+        "message": "Estás dentro de la API PUT de usuario"
+    });
+
+});
+
+router.delete("/categoria", (req, res) => {
+
+    res.status(200).json({
+        "message": "Estás dentro de la API DELETE de usuario"
+    });
+});
+
+module.exports = router;

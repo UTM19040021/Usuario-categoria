@@ -1,15 +1,36 @@
 const express = require("express");
+const UsuarioModel = require("../models/Usuario.model");
 const router = express.Router();
 
-router.post('/body', (req, response) => {
-    const usuario = req.body
-    response.status(200).json({
-        resp:"Estas dentro de la API post de usuario",
-        usuario
+router.post('/', (req, response) => {
+
+    const usuario = new UsuarioModel(require.body);
+
+    usuario.save()
+    .then((usuarioRegistrado) => {
+        response.status(200).json({
+            msg:"usuario registrado exitosamente",
+            status: 200,
+            cont: {
+                usuario: usuarioRegistrado
+            }
+        });
     })
+    .catch((err) =>{
+        return response.status(500).json({
+            msg: "Error al registrar el usuario",
+            status: 500,
+            cont:{
+                error: err
+            }
+        });
+    });
 });
 
 router.get("/", (request, response) => {
+
+    UsuarioModel.find()
+
     response.status(200).json({
         response:"Se consuito la API GET general de usuario",
     })
@@ -56,11 +77,6 @@ router.get("/usuarioBusqueda", (req, resp) => {
 
 }); 
 
-router.post("/", (request, response) => {
-    response.status(200).json({
-        response:"Se consuito la API POST de usuario"
-    })
-});
 
 router.put("/", (request, response) => {
     response.status(200).json({

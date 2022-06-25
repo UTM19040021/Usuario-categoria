@@ -1,16 +1,18 @@
-const express = require("express");
+const express = require ("express");
+const mongoose = require("mongoose");
 require("colors");
 require("./config/config");
-const app = express();
-const routes = require('./routes/index');
+const app =express();
+const routes =  require('./routes/index');
 
-var body_parser = require('body-parser');
-app.use(body_parser.urlencoded({extended:true}));
-
-app.use("/api", routes);
-
-app.listen(process.env.PORT, () => {
-    console.log("ONLINE".green  + "Se esta escuchando en el puerto 3000")
+app.use("/api",routes);
+mongoose.connect(process.env.URLDB, {})
+.then(() => {
+    console.log("[MONGODB]" .green + "DATABASE CONNECTION SUCCESSFULLY");
+})
+.catch((err) => {
+    console.log("[MONGODB]" .red + "CONNECTION FAILED" + err);
 });
-
-
+app.listen(3000, ()=> {
+    console.log("ONLINE".green+"LISTEN TO PORT: "+"3000".blue);
+});

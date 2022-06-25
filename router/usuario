@@ -1,0 +1,78 @@
+const { Router } = require("express");
+const express = require("express");
+const router = express.Router();
+
+router.get("/usuario/:", (request, response) => {
+
+    const  id =request.params.id;
+     response.status(200).json({
+            "message": "Estás dentro de la API GET Usuario"
+
+//API CON PARAMETROS OBLIGATORIOS
+router.get("/usuario/:id"/:nombre/:apellido/:edad", (request, response) => {
+
+    //DECLARACION INDIVIDUAL
+   //const  id =request.params.id;
+   // const nombre = request.params.nombre;
+    //const edad = request.params.edad;
+    //const apellido = request.params.apellido;
+
+    //DESESTRUCTURACIÓN
+    const{id, nombre, edad, apellido } = request.params;
+
+    //"22" == 22 -> true (validación estricta - Verifica solamente el valor)
+    //"22" === 22 -> false (validación estricta - Verifica valor y tipo de dato)
+
+    if (Number(edad).toString() === "NAN") {
+       return response.status (400).json({
+            "message": "El valor ingresado en la edad es inválido"
+        })
+    }
+    response.status(200).json({
+        "message": "Estás dentro de la API GET Usuario",
+        "id": id,
+        "nombre": nombre,
+        "edad": Number(edad),
+        "apellido": apellido
+
+    });
+
+//API CON PARÁMETROS OPCIONALES
+router.get("/usuarioBusqueda", (req, resp) => {
+
+    const id = req.query.id; //PARÁMETRO OPCIONAL
+    const nombre = req.query.nombre;
+
+    resp.status(200).json({
+        "message": "Se consultó la API usuarioBusqueda";
+        id 
+    })
+
+}
+
+});
+
+router.post("/usuario", (request, response) => {
+
+    response.status(200).json({
+        "message": "Estás dentro de la API POST de usuario"
+    });
+
+});
+
+router.put("/usuario", (req, res) => {
+
+    res.status(200).json({
+        "message": "Estás dentro de la API PUT de usuario"
+    });
+
+});
+
+router.delete("/usuario", (req, res) => {
+
+    res.status(200).json({
+        "message": "Estás dentro de la API DELETE de usuario"
+    });
+});
+
+module.exports = router;
