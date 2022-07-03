@@ -1,24 +1,24 @@
 const express = require("express");
-const UsuarioModel = require("../models/Usuario.model");
+const CategoriaModel = require("../models/Categoria.model");
 const router = express.Router();
 
 router.post('/', (req, response) => {
 
-    const usuario = new UsuarioModel(req.body);
+    const categoria = new CategoriaModel(req.body);
 
-    usuario.save()
-    .then((usuarioRegistrado) => {
+    categoria.save()
+    .then((categoriaRegistrado) => {
         response.status(200).json({
-            msg:"usuario registrado exitosamente",
+            msg:"categoria registrado exitosamente",
             status: 200,
             cont: {
-                usuario: usuarioRegistrado
+                categoria: categoriaRegistrado
             }
         });
     })
     .catch((err) =>{
         return response.status(500).json({
-            msg: "Error al registrar el usuario",
+            msg: "Error al registrar la categoria",
             status: 500,
             cont:{
                 error: err
@@ -29,15 +29,15 @@ router.post('/', (req, response) => {
 
 router.get("/", (request, response) => {
 
-    UsuarioModel.find()
+    CategoriaModel.find()
 
     response.status(200).json({
-        response:"Se consuito la API GET general de usuario",
+        response:"Se consuito la API GET general de categoria",
     })
 });
 
 //API CON PARAMETROS OBLIGATORIOS
-router.get("/:id/:nombre/:edad/:apellido", (request, response) => {
+router.get("/:nombre/:descripcion/:categoriaNombre/:activo", (request, response) => {
 
     //DECLARACION INDIVIDUAL 
     /*
@@ -49,29 +49,25 @@ router.get("/:id/:nombre/:edad/:apellido", (request, response) => {
     // == Dos iguales es true (validacion estricta - verifica solamente el vlaor)
     // == Tres iguales es false (Validacion estrcita - Verifica valor y tipo de dato)
     //DESESTRUCTURACION
-    const {id,nombre,edad,apellido} = request.params;
-
-    if(Number(edad).toString() === "NaN") {
-       return response.status(400).json({
-          "message": "El valor ingresado en la edad es incorrecto"  
-        });
-    }
+    const {id,nombre,descripcion,categoriaNombre,activo} = request.params;
+    
     return response.status(200).json({
-        response:"Se consuito la API GET especiifca de usuario",
+        response:"Se consuito la API GET especiifca de categoria",
         id,
         nombre,
-        edad : Number(edad),
-        apellido
+        descripcion,
+        categoriaNombre,
+        activo
     })
 });
 
 //API CON PARAMETROS OPCIONALES
-router.get("/usuarioBusqueda", (req, resp) => {
+router.get("/categoriaBusqueda", (req, resp) => {
 
     const id = req.query.id; //Parametro opcional
     resp.status(200).json({
 
-        "message": "Se consulto la API usuarioBusqueda exitosamente",
+        "message": "Se consulto la API categoriaBusqueda exitosamente",
         id
     })    
 
@@ -80,13 +76,13 @@ router.get("/usuarioBusqueda", (req, resp) => {
 
 router.put("/", (request, response) => {
     response.status(200).json({
-        response:"Se consuito la API PUT de usuario"
+        response:"Se consuito la API PUT de categoria"
     })
 });
 
 router.delete("/", (request, response) => {
     response.status(200).json({
-        response:"Se consuito la API DELETE de usuario"
+        response:"Se consuito la API DELETE de categoria"
     })
 });
 

@@ -5,6 +5,9 @@ require("./config/config");
 const app =express();
 const routes =  require('./routes/index');
 
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
 app.use("/api",routes);
 mongoose.connect(process.env.URLDB, {})
 .then(() => {
